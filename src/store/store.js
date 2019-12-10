@@ -39,6 +39,15 @@ export const store = new Vuex.Store({
       Axios.delete("students/" + code).then(response => {
         commit(TypeStore.mutations.SET_PSTUDENT1, response.data);
       });
+    },
+    [TypeStore.actions.PUT_STUDENTS]: ({ commit }, list) => {
+      Axios.put(`students/${list[0]}`, list[1])
+        .then(function(response) {
+          commit(TypeStore.mutations.SET_PSTUDENT2, response.data);
+        })
+        .catch(function(error) {
+          commit(TypeStore.mutations.SET_PSTUDENT2, error);
+        });
     }
   },
   //Cambio de valor de variables

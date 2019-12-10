@@ -29,52 +29,47 @@
 
       <b-button
         type="submit"
-        @click= "holos()"
+        @click="holos()"
         variant="success"
         style="margin:20px"
       >
         Agregar</b-button
       >
 
-        <b-button variant="primary" style="margin:20px" router-link to="/"
-          >Regresar</b-button
-        >
-
+      <b-button variant="primary" style="margin:20px" router-link to="/"
+        >Regresar</b-button
+      >
     </form>
 
-        <b-alert
+    <b-alert
       variant="primary"
       dismissible
       fade
       :show="showDismissibleAlert"
-      @dismissed="showDismissibleAlert=false"
+      @dismissed="showDismissibleAlert = false"
     >
       Exitoso!!
     </b-alert>
-
-
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { TypeStore } from "../store/types/store.types";
+
 export default {
   name: "newStudent",
   methods: {
     ...mapActions({
       GET_STUDENTS: TypeStore.actions.GET_STUDENTS,
       POST_STUDENTS: TypeStore.actions.POST_STUDENTS
-      
     }),
     formSubmit: function(event) {
       event.target.reset();
     },
-    holos: function(){
-      this.POST_STUDENTS(this.model),
-      this.showDismissibleAlert=true
+    holos: function() {
+      this.POST_STUDENTS(this.model), (this.showDismissibleAlert = true);
     }
-    
   },
   computed: {
     ...mapGetters({
@@ -84,7 +79,6 @@ export default {
   },
   mounted() {
     this.GET_STUDENTS();
-    //this.POST_STUDENTS(this.model);
   },
   props: ["post-route"],
   data() {
@@ -93,8 +87,8 @@ export default {
         name: "",
         code: ""
       },
-    showDismissibleAlert: false
-    }
+      showDismissibleAlert: false
+    };
   }
 };
 </script>
