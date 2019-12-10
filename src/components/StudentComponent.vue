@@ -6,7 +6,7 @@
       <b-form>
         <b-table :items="STUDENTS" :fields="cols">
           <template v-slot:cell(show_details)="row">
-            <b-button type="submit" variant="danger" @click="borrar(row.item.id)">Eliminar</b-button>
+            <b-button type="submit" variant="danger" @click="borrar(row.item.id,id)">Eliminar</b-button>
             <b-button
               @click="row.toggleDetails"
               variant="warning"
@@ -63,9 +63,11 @@ export default {
       DELETE_STUDENTS: TypeStore.actions.DELETE_STUDENTS,
       PUT_STUDENTS: TypeStore.actions.PUT_STUDENTS
     }),
-    borrar: function(code) {
-      this.DELETE_STUDENTS(code, 1);
+    borrar: function(code,id) {
+      this.DELETE_STUDENTS(code, 1), this.STUDENTS.splice(id, 1);
     }
+    // bor: function(code) {
+    // }
   },
   computed: {
     ...mapGetters({
